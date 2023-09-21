@@ -82,6 +82,7 @@
         <form action="" method="post" id="commentForm">
             <div class="d-flex-come">
                 <div class="form-group-comment">
+                    <input type="hidden" name="user_postId" style="display: none;" value="<?php echo $rowAll['poster_id'];?>">
                     <input type="hidden" name="post_id" style="display: none;" value="<?php echo $postId;?>">
                     <input type="text" name="comment_content" id="commentInput" placeholder="what's on your mind">
                 </div>

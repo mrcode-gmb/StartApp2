@@ -269,6 +269,9 @@
                 return $x;
         }
 
+
+
+
 //         SELECT u.*, c.*
 // FROM users u
 // LEFT JOIN (
@@ -289,3 +292,4 @@
 <!-- JOIN (SELECT c.*, MAX(c.timestamp) AS last_message_timestamp FROM chat_tbl c WHERE (c.request_id_c = 2 AND  c.sender_id = 7) OR (c.request_id_c = 7 AND  c.sender_id = 2) GROUP BY  c.id) m ON u.id = m.request_id_c WHERE (fr.request_id = 2 AND fr.my_id = 7 AND fr.accept_status = 1) OR (fr.request_id = 7 AND fr.my_id = 2 AND fr.accept_status = 1) ORDER BY m.last_message_timestamp DESC -->
 
 <!-- JOIN (SELECT c.*, MAX(c.timestamp) AS last_message_timestamp FROM chat_tbl c WHERE (c.request_id_c = 2 AND  c.sender_id = 7) OR (c.request_id_c = 7 AND  c.sender_id = 2) GROUP BY  c.id) m ON u.id = m.request_id_c WHERE (fr.request_id = 2 AND fr.my_id = 7 AND fr.accept_status = 1) OR (fr.request_id = 7 AND fr.my_id = 2 AND fr.accept_status = 1) ORDER BY m.last_message_timestamp DESC -->
+<!-- SELECT * FROM like_table lt LEFT JOIN comment_tbl ct ON ct.postId = lt.posting_id_like LEFT JOIN unlike_tbl ut ON ct.postId = lt.posting_id_like; -->

@@ -60,10 +60,10 @@
         
         // start comment query here 
 
-        public function createNewCommentFunction($postId,$senderId,$commentContent){
-            $insert = "INSERT INTO comment_tbl(postId,sender_comment_id,comment_content,comt_date,time_zone) VALUES (?,?,?,?,?)"; 
+        public function createNewCommentFunction($userID,$postId,$senderId,$commentContent){
+            $insert = "INSERT INTO comment_tbl(users_create_id,postId,sender_comment_id,comment_content,comt_date,time_zone) VALUES (?,?,?,?,?,?)"; 
             $query = $this->dbConned->prepare($insert);
-            $query->execute(array($postId,$senderId,$commentContent, date("d M, Y. h:i a"),time()));
+            $query->execute(array($userID,$postId,$senderId,$commentContent, date("d M, Y. h:i a"),time()));
         }
 
         public function SelectAllCommentFunction($postId){

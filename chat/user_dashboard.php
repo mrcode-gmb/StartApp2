@@ -3,7 +3,9 @@
 
 include_once ("session_destry.php");
 include_once ("../controller/user_crud.php");
+include_once ("../controller/NotificationController.php");
 $newObj = new createUsers();
+$note   = new NotificationController();
 
 if(isset($_GET['id'])){
    $id = $_GET['id'];
@@ -14,6 +16,14 @@ if(isset($_GET['id'])){
 $id = $_SESSION['id'];
 if (isset($id)) {
     $update = $newObj->userOnline($id);
+}
+
+$noted = $note->getCommentNote();
+// $rowGet = $noted->fetch();
+// print_r ($rowGet);
+$result = "";
+if($count = $noted->rowCount()>0){
+    $result = '<p href="" class="bell-radius"></p>';
 }
 ?>
 <!DOCTYPE html>
@@ -231,7 +241,8 @@ if (isset($id)) {
                     </path>
                     <path>
                         <span class="fa  fa-regular fa-bell" style="font-size: 19px;" onclick="openNotification()"></span>
-                        <p href="" class="bell">6</p>
+                        <!-- <p href="" class="bell">6</p> -->
+                        <?php echo $result;?>
                     </path>
                     <path href="#">
                         <a href="reals_videos.php" ><i class="bx bx-video" style="font-size: 24px; transform: rotate(180deg);"></i></a>
@@ -311,203 +322,306 @@ if (isset($id)) {
                     <i class="fa fa-search"></i>
                 </div>
             </div>
+            <div class="link">
+                <div class="all-0" style="width:75%;">
+                    <div class="link-requested">
+                        <a href="#!" onclick="openLikeNoted()">Like</i></a>
+                        <div class="span-pendding">
+                            <div class="noted_like" id="noted_like">
+                            +9
+                            </div>
+                        </div>
+                    </div>
+                    <div class="link-requested">
+                        <a href="#!" onclick="openCommentNoted()">Comment</a>
+                        <div class="span-pendding" id="shownumberofcomment">
+                            <!-- show all notification about comment  -->
+                        </div>
+                    </div>
+                    <div class="link-requested">
+                        <a href="#!" onclick="openDisLikeNoted()">Dislike</a>
+                        <div class="span-pendding">
+                            <div class="noted_like" id="noted_like">
+                                <!-- show list of pedding request here  -->
+                            +9
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="not-body">
-                <div class="not-block">
-                    <div class="not-user">
-                        <img src="../asset/img/studnt_hall.jpeg" alt="">
-                        <div class="not-user-name">
-                            <h4>Abubakar Umar</h4>
-                            <p>comment on your post ...</p>
-                            <span>2m ago</span>
+                <!-- liking notifications -->
+                <div class="liking-noted">
+                    <div class="not-block">
+                        <div class="not-user">
+                            <img src="../asset/img/user3-128x128.jpg" alt="">
+                            <div class="not-user-name">
+                                <h4>Merry Jonh</h4>
+                                <p>like on your post ...</p>
+                                <span>6h ago</span>
+                            </div>
+                        </div>
+                        <div class="not-toggle">
+                            <i class="bi bi-trash"></i>
                         </div>
                     </div>
-                    <div class="not-toggle">
-                        <i class="bi bi-trash"></i>
-                    </div>
-                </div>
-                <div class="not-block">
-                    <div class="not-user">
-                        <img src="../asset/img/user3-128x128.jpg" alt="">
-                        <div class="not-user-name">
-                            <h4>Merry Jonh</h4>
-                            <p>like on your post ...</p>
-                            <span>6h ago</span>
+                    <div class="not-block">
+                        <div class="not-user">
+                            <img src="../asset/img/user6-128x128.jpg" alt="">
+                            <div class="not-user-name">
+                                <h4>Salisu Umar</h4>
+                                <p>like on your post ...</p>
+                                <span>7d ago</span>
+                            </div>
+                        </div>
+                        <div class="not-toggle">
+                            <i class="bi bi-trash"></i>
                         </div>
                     </div>
-                    <div class="not-toggle">
-                        <i class="bi bi-trash"></i>
-                    </div>
-                </div>
-                <div class="not-block">
-                    <div class="not-user">
-                        <img src="../asset/img/user6-128x128.jpg" alt="">
-                        <div class="not-user-name">
-                            <h4>Salisu Umar</h4>
-                            <p>like on your post ...</p>
-                            <span>7d ago</span>
+                    <div class="not-block">
+                        <div class="not-user">
+                            <img src="../asset/img/user3-128x128.jpg" alt="">
+                            <div class="not-user-name">
+                                <h4>Merry Jonh</h4>
+                                <p>like on your post ...</p>
+                                <span>6h ago</span>
+                            </div>
+                        </div>
+                        <div class="not-toggle">
+                            <i class="bi bi-trash"></i>
                         </div>
                     </div>
-                    <div class="not-toggle">
-                        <i class="bi bi-trash"></i>
-                    </div>
-                </div>
-                <div class="not-block">
-                    <div class="not-user">
-                        <img src="../asset/img/studnt_hall.jpeg" alt="">
-                        <div class="not-user-name">
-                            <h4>Abubakar Umar</h4>
-                            <p>comment on your post ...</p>
-                            <span>2m ago</span>
+                    <div class="not-block">
+                        <div class="not-user">
+                            <img src="../asset/img/user6-128x128.jpg" alt="">
+                            <div class="not-user-name">
+                                <h4>Salisu Umar</h4>
+                                <p>like on your post ...</p>
+                                <span>7d ago</span>
+                            </div>
+                        </div>
+                        <div class="not-toggle">
+                            <i class="bi bi-trash"></i>
                         </div>
                     </div>
-                    <div class="not-toggle">
-                        <i class="bi bi-trash"></i>
-                    </div>
-                </div>
-                <div class="not-block">
-                    <div class="not-user">
-                        <img src="../asset/img/user3-128x128.jpg" alt="">
-                        <div class="not-user-name">
-                            <h4>Merry Jonh</h4>
-                            <p>like on your post ...</p>
-                            <span>6h ago</span>
+                    <div class="not-block">
+                        <div class="not-user">
+                            <img src="../asset/img/user3-128x128.jpg" alt="">
+                            <div class="not-user-name">
+                                <h4>Merry Jonh</h4>
+                                <p>like on your post ...</p>
+                                <span>6h ago</span>
+                            </div>
+                        </div>
+                        <div class="not-toggle">
+                            <i class="bi bi-trash"></i>
                         </div>
                     </div>
-                    <div class="not-toggle">
-                        <i class="bi bi-trash"></i>
-                    </div>
-                </div>
-                <div class="not-block">
-                    <div class="not-user">
-                        <img src="../asset/img/user6-128x128.jpg" alt="">
-                        <div class="not-user-name">
-                            <h4>Salisu Umar</h4>
-                            <p>like on your post ...</p>
-                            <span>7d ago</span>
+                    <div class="not-block">
+                        <div class="not-user">
+                            <img src="../asset/img/user6-128x128.jpg" alt="">
+                            <div class="not-user-name">
+                                <h4>Salisu Umar</h4>
+                                <p>like on your post ...</p>
+                                <span>7d ago</span>
+                            </div>
+                        </div>
+                        <div class="not-toggle">
+                            <i class="bi bi-trash"></i>
                         </div>
                     </div>
-                    <div class="not-toggle">
-                        <i class="bi bi-trash"></i>
-                    </div>
-                </div>
-                <div class="not-block">
-                    <div class="not-user">
-                        <img src="../asset/img/studnt_hall.jpeg" alt="">
-                        <div class="not-user-name">
-                            <h4>Abubakar Umar</h4>
-                            <p>comment on your post ...</p>
-                            <span>2m ago</span>
+                    <div class="not-block">
+                        <div class="not-user">
+                            <img src="../asset/img/user3-128x128.jpg" alt="">
+                            <div class="not-user-name">
+                                <h4>Merry Jonh</h4>
+                                <p>like on your post ...</p>
+                                <span>6h ago</span>
+                            </div>
+                        </div>
+                        <div class="not-toggle">
+                            <i class="bi bi-trash"></i>
                         </div>
                     </div>
-                    <div class="not-toggle">
-                        <i class="bi bi-trash"></i>
-                    </div>
-                </div>
-                <div class="not-block">
-                    <div class="not-user">
-                        <img src="../asset/img/user3-128x128.jpg" alt="">
-                        <div class="not-user-name">
-                            <h4>Merry Jonh</h4>
-                            <p>like on your post ...</p>
-                            <span>6h ago</span>
+                    <div class="not-block">
+                        <div class="not-user">
+                            <img src="../asset/img/user6-128x128.jpg" alt="">
+                            <div class="not-user-name">
+                                <h4>Salisu Umar</h4>
+                                <p>like on your post ...</p>
+                                <span>7d ago</span>
+                            </div>
+                        </div>
+                        <div class="not-toggle">
+                            <i class="bi bi-trash"></i>
                         </div>
                     </div>
-                    <div class="not-toggle">
-                        <i class="bi bi-trash"></i>
-                    </div>
-                </div>
-                <div class="not-block">
-                    <div class="not-user">
-                        <img src="../asset/img/user6-128x128.jpg" alt="">
-                        <div class="not-user-name">
-                            <h4>Salisu Umar</h4>
-                            <p>like on your post ...</p>
-                            <span>7d ago</span>
+                    <div class="not-block">
+                        <div class="not-user">
+                            <img src="../asset/img/user3-128x128.jpg" alt="">
+                            <div class="not-user-name">
+                                <h4>Merry Jonh</h4>
+                                <p>like on your post ...</p>
+                                <span>6h ago</span>
+                            </div>
+                        </div>
+                        <div class="not-toggle">
+                            <i class="bi bi-trash"></i>
                         </div>
                     </div>
-                    <div class="not-toggle">
-                        <i class="bi bi-trash"></i>
-                    </div>
-                </div>
-                <div class="not-block">
-                    <div class="not-user">
-                        <img src="../asset/img/studnt_hall.jpeg" alt="">
-                        <div class="not-user-name">
-                            <h4>Abubakar Umar</h4>
-                            <p>comment on your post ...</p>
-                            <span>2m ago</span>
+                    <div class="not-block">
+                        <div class="not-user">
+                            <img src="../asset/img/user7-128x128.jpg" alt="">
+                            <div class="not-user-name">
+                                <h4>Salisu Umar</h4>
+                                <p>like on your post ...</p>
+                                <span>7d ago</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="not-toggle">
-                        <i class="bi bi-trash"></i>
-                    </div>
-                </div>
-                <div class="not-block">
-                    <div class="not-user">
-                        <img src="../asset/img/user3-128x128.jpg" alt="">
-                        <div class="not-user-name">
-                            <h4>Merry Jonh</h4>
-                            <p>like on your post ...</p>
-                            <span>6h ago</span>
+                        <div class="not-toggle">
+                            <i class="bi bi-trash"></i>
                         </div>
-                    </div>
-                    <div class="not-toggle">
-                        <i class="bi bi-trash"></i>
-                    </div>
-                </div>
-                <div class="not-block">
-                    <div class="not-user">
-                        <img src="../asset/img/user6-128x128.jpg" alt="">
-                        <div class="not-user-name">
-                            <h4>Salisu Umar</h4>
-                            <p>like on your post ...</p>
-                            <span>7d ago</span>
-                        </div>
-                    </div>
-                    <div class="not-toggle">
-                        <i class="bi bi-trash"></i>
-                    </div>
-                </div>
-                <div class="not-block">
-                    <div class="not-user">
-                        <img src="../asset/img/studnt_hall.jpeg" alt="">
-                        <div class="not-user-name">
-                            <h4>Abubakar Umar</h4>
-                            <p>comment on your post ...</p>
-                            <span>2m ago</span>
-                        </div>
-                    </div>
-                    <div class="not-toggle">
-                        <i class="bi bi-trash"></i>
-                    </div>
-                </div>
-                <div class="not-block">
-                    <div class="not-user">
-                        <img src="../asset/img/user3-128x128.jpg" alt="">
-                        <div class="not-user-name">
-                            <h4>Merry Jonh</h4>
-                            <p>like on your post ...</p>
-                            <span>6h ago</span>
-                        </div>
-                    </div>
-                    <div class="not-toggle">
-                        <i class="bi bi-trash"></i>
-                    </div>
-                </div>
-                <div class="not-block">
-                    <div class="not-user">
-                        <img src="../asset/img/user7-128x128.jpg" alt="">
-                        <div class="not-user-name">
-                            <h4>Salisu Umar</h4>
-                            <p>like on your post ...</p>
-                            <span>7d ago</span>
-                        </div>
-                    </div>
-                    <div class="not-toggle">
-                        <i class="bi bi-trash"></i>
                     </div>
                 </div>
 
+                <!-- comment Notifications -->
+                <div class="comment-noted" id="comment-noted">
+
+                </div>
+
+                <!-- liking notifications -->
+                <div class="disliking-noted">
+                    <div class="not-block">
+                        <div class="not-user">
+                            <img src="../asset/img/user3-128x128.jpg" alt="">
+                            <div class="not-user-name">
+                                <h4>Merry Jonh</h4>
+                                <p>Dislike your post ...</p>
+                                <span>6h ago</span>
+                            </div>
+                        </div>
+                        <div class="not-toggle">
+                            <i class="bi bi-trash"></i>
+                        </div>
+                    </div>
+                    <div class="not-block">
+                        <div class="not-user">
+                            <img src="../asset/img/user6-128x128.jpg" alt="">
+                            <div class="not-user-name">
+                                <h4>Salisu Umar</h4>
+                                <p>like on your post ...</p>
+                                <span>7d ago</span>
+                            </div>
+                        </div>
+                        <div class="not-toggle">
+                            <i class="bi bi-trash"></i>
+                        </div>
+                    </div>
+                    <div class="not-block">
+                        <div class="not-user">
+                            <img src="../asset/img/user3-128x128.jpg" alt="">
+                            <div class="not-user-name">
+                                <h4>Merry Jonh</h4>
+                                <p>like on your post ...</p>
+                                <span>6h ago</span>
+                            </div>
+                        </div>
+                        <div class="not-toggle">
+                            <i class="bi bi-trash"></i>
+                        </div>
+                    </div>
+                    <div class="not-block">
+                        <div class="not-user">
+                            <img src="../asset/img/user6-128x128.jpg" alt="">
+                            <div class="not-user-name">
+                                <h4>Salisu Umar</h4>
+                                <p>like on your post ...</p>
+                                <span>7d ago</span>
+                            </div>
+                        </div>
+                        <div class="not-toggle">
+                            <i class="bi bi-trash"></i>
+                        </div>
+                    </div>
+                    <div class="not-block">
+                        <div class="not-user">
+                            <img src="../asset/img/user3-128x128.jpg" alt="">
+                            <div class="not-user-name">
+                                <h4>Merry Jonh</h4>
+                                <p>like on your post ...</p>
+                                <span>6h ago</span>
+                            </div>
+                        </div>
+                        <div class="not-toggle">
+                            <i class="bi bi-trash"></i>
+                        </div>
+                    </div>
+                    <div class="not-block">
+                        <div class="not-user">
+                            <img src="../asset/img/user6-128x128.jpg" alt="">
+                            <div class="not-user-name">
+                                <h4>Salisu Umar</h4>
+                                <p>like on your post ...</p>
+                                <span>7d ago</span>
+                            </div>
+                        </div>
+                        <div class="not-toggle">
+                            <i class="bi bi-trash"></i>
+                        </div>
+                    </div>
+                    <div class="not-block">
+                        <div class="not-user">
+                            <img src="../asset/img/user3-128x128.jpg" alt="">
+                            <div class="not-user-name">
+                                <h4>Merry Jonh</h4>
+                                <p>like on your post ...</p>
+                                <span>6h ago</span>
+                            </div>
+                        </div>
+                        <div class="not-toggle">
+                            <i class="bi bi-trash"></i>
+                        </div>
+                    </div>
+                    <div class="not-block">
+                        <div class="not-user">
+                            <img src="../asset/img/user6-128x128.jpg" alt="">
+                            <div class="not-user-name">
+                                <h4>Salisu Umar</h4>
+                                <p>like on your post ...</p>
+                                <span>7d ago</span>
+                            </div>
+                        </div>
+                        <div class="not-toggle">
+                            <i class="bi bi-trash"></i>
+                        </div>
+                    </div>
+                    <div class="not-block">
+                        <div class="not-user">
+                            <img src="../asset/img/user3-128x128.jpg" alt="">
+                            <div class="not-user-name">
+                                <h4>Merry Jonh</h4>
+                                <p>like on your post ...</p>
+                                <span>6h ago</span>
+                            </div>
+                        </div>
+                        <div class="not-toggle">
+                            <i class="bi bi-trash"></i>
+                        </div>
+                    </div>
+                    <div class="not-block">
+                        <div class="not-user">
+                            <img src="../asset/img/user7-128x128.jpg" alt="">
+                            <div class="not-user-name">
+                                <h4>Salisu Umar</h4>
+                                <p>like on your post ...</p>
+                                <span>7d ago</span>
+                            </div>
+                        </div>
+                        <div class="not-toggle">
+                            <i class="bi bi-trash"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -646,7 +760,7 @@ if (isset($id)) {
 <script src="../javaScript/group_request.js"></script>
 <script src="../javaScript/post_script.js"></script>
 <script src="../javaScript/privatechat.js"></script>
-<!-- <script src="../javaScript/d3.min.js"></script> -->
+<script src="../javaScript/notification.js"></script>
 <!-- <script src="../javaScript/alert.js"></script> -->
 </body>
 </html>
