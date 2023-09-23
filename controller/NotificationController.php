@@ -32,6 +32,23 @@
         }
 
 
+        public function GetLikeNoted()
+        {
+            $select = "SELECT * FROM like_table lt LEFT JOIN create_posting ct ON ct.post_id = lt.posting_id_like WHERE ct.poster_id = ? AND lt.like_view_status = 0";    
+            $query  = $this->dbConn->prepare($select);
+            $query  ->execute(array($_SESSION['id']));
+            return $query;
+        }
+
+        public function GetLikeNotedList()
+        {
+            $select = "SELECT * FROM like_table lt LEFT JOIN create_posting ct ON ct.post_id = lt.posting_id_like LEFT JOIN users u ON u.id = lt.sender_like_id WHERE ct.poster_id = ? AND lt.like_view_status = 0 ORDER BY lt.like_id DESC";    
+            $query  = $this->dbConn->prepare($select);
+            $query  ->execute(array($_SESSION['id']));
+            return $query;
+        }
+
+
 
 
 

@@ -31,7 +31,7 @@ function openDisLikeNoted(){
 
 
 
-
+// comment interval 
 setInterval(()=>{
 
     let xhr = new XMLHttpRequest();
@@ -57,5 +57,35 @@ setInterval(()=>{
         }
     }
     httpr.send();
+
+},300);
+
+
+// liking interval 
+
+setInterval(()=>{
+
+    let liked = new XMLHttpRequest();
+    liked.open("POST", "badge/like_noted.php", true);
+    liked.onload = ()=>{
+        if(liked.readyState === XMLHttpRequest.DONE && liked.status === 200){
+            document.getElementById("shownumberoflike").innerHTML = liked.response;
+        }
+    }
+    liked.send();
+
+},300);
+
+setInterval(()=>{
+
+    let likeView = new XMLHttpRequest();
+    likeView.open("POST", "notification/like_view_list.php", true);
+    likeView.onload = ()=>{
+        if(likeView.readyState === XMLHttpRequest.DONE && likeView.status === 200){
+            document.getElementById("like-views").innerHTML = likeView.response;
+            // alert(likeView.response);
+        }
+    }
+    likeView.send();
 
 },300);

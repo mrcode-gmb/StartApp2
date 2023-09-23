@@ -21,7 +21,7 @@
         public  function storePostingIdLike($postId,$setId){
             $insert = "INSERT INTO like_table(posting_id_like, sender_like_id, date) VALUES (?,?,?)";
             $query = $this->dbConned->prepare($insert);
-            $query->execute(array($postId,$setId, date('y-m-d')));
+            $query->execute(array($postId,$setId, time()));
             
         }
         // select count like with one 

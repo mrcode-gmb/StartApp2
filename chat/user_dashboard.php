@@ -19,10 +19,11 @@ if (isset($id)) {
 }
 
 $noted = $note->getCommentNote();
+$like = $note->GetLikeNoted();
 // $rowGet = $noted->fetch();
 // print_r ($rowGet);
 $result = "";
-if($count = $noted->rowCount()>0){
+if($noted->rowCount()>0 || $like->rowCount()>0){
     $result = '<p href="" class="bell-radius"></p>';
 }
 ?>
@@ -326,10 +327,8 @@ if($count = $noted->rowCount()>0){
                 <div class="all-0" style="width:75%;">
                     <div class="link-requested">
                         <a href="#!" onclick="openLikeNoted()">Like</i></a>
-                        <div class="span-pendding">
-                            <div class="noted_like" id="noted_like">
-                            +9
-                            </div>
+                        <div class="span-pendding"id="shownumberoflike">
+                            <!-- show all notification about like  -->
                         </div>
                     </div>
                     <div class="link-requested">
@@ -351,142 +350,13 @@ if($count = $noted->rowCount()>0){
             </div>
             <div class="not-body">
                 <!-- liking notifications -->
-                <div class="liking-noted">
-                    <div class="not-block">
-                        <div class="not-user">
-                            <img src="../asset/img/user3-128x128.jpg" alt="">
-                            <div class="not-user-name">
-                                <h4>Merry Jonh</h4>
-                                <p>like on your post ...</p>
-                                <span>6h ago</span>
-                            </div>
-                        </div>
-                        <div class="not-toggle">
-                            <i class="bi bi-trash"></i>
-                        </div>
-                    </div>
-                    <div class="not-block">
-                        <div class="not-user">
-                            <img src="../asset/img/user6-128x128.jpg" alt="">
-                            <div class="not-user-name">
-                                <h4>Salisu Umar</h4>
-                                <p>like on your post ...</p>
-                                <span>7d ago</span>
-                            </div>
-                        </div>
-                        <div class="not-toggle">
-                            <i class="bi bi-trash"></i>
-                        </div>
-                    </div>
-                    <div class="not-block">
-                        <div class="not-user">
-                            <img src="../asset/img/user3-128x128.jpg" alt="">
-                            <div class="not-user-name">
-                                <h4>Merry Jonh</h4>
-                                <p>like on your post ...</p>
-                                <span>6h ago</span>
-                            </div>
-                        </div>
-                        <div class="not-toggle">
-                            <i class="bi bi-trash"></i>
-                        </div>
-                    </div>
-                    <div class="not-block">
-                        <div class="not-user">
-                            <img src="../asset/img/user6-128x128.jpg" alt="">
-                            <div class="not-user-name">
-                                <h4>Salisu Umar</h4>
-                                <p>like on your post ...</p>
-                                <span>7d ago</span>
-                            </div>
-                        </div>
-                        <div class="not-toggle">
-                            <i class="bi bi-trash"></i>
-                        </div>
-                    </div>
-                    <div class="not-block">
-                        <div class="not-user">
-                            <img src="../asset/img/user3-128x128.jpg" alt="">
-                            <div class="not-user-name">
-                                <h4>Merry Jonh</h4>
-                                <p>like on your post ...</p>
-                                <span>6h ago</span>
-                            </div>
-                        </div>
-                        <div class="not-toggle">
-                            <i class="bi bi-trash"></i>
-                        </div>
-                    </div>
-                    <div class="not-block">
-                        <div class="not-user">
-                            <img src="../asset/img/user6-128x128.jpg" alt="">
-                            <div class="not-user-name">
-                                <h4>Salisu Umar</h4>
-                                <p>like on your post ...</p>
-                                <span>7d ago</span>
-                            </div>
-                        </div>
-                        <div class="not-toggle">
-                            <i class="bi bi-trash"></i>
-                        </div>
-                    </div>
-                    <div class="not-block">
-                        <div class="not-user">
-                            <img src="../asset/img/user3-128x128.jpg" alt="">
-                            <div class="not-user-name">
-                                <h4>Merry Jonh</h4>
-                                <p>like on your post ...</p>
-                                <span>6h ago</span>
-                            </div>
-                        </div>
-                        <div class="not-toggle">
-                            <i class="bi bi-trash"></i>
-                        </div>
-                    </div>
-                    <div class="not-block">
-                        <div class="not-user">
-                            <img src="../asset/img/user6-128x128.jpg" alt="">
-                            <div class="not-user-name">
-                                <h4>Salisu Umar</h4>
-                                <p>like on your post ...</p>
-                                <span>7d ago</span>
-                            </div>
-                        </div>
-                        <div class="not-toggle">
-                            <i class="bi bi-trash"></i>
-                        </div>
-                    </div>
-                    <div class="not-block">
-                        <div class="not-user">
-                            <img src="../asset/img/user3-128x128.jpg" alt="">
-                            <div class="not-user-name">
-                                <h4>Merry Jonh</h4>
-                                <p>like on your post ...</p>
-                                <span>6h ago</span>
-                            </div>
-                        </div>
-                        <div class="not-toggle">
-                            <i class="bi bi-trash"></i>
-                        </div>
-                    </div>
-                    <div class="not-block">
-                        <div class="not-user">
-                            <img src="../asset/img/user7-128x128.jpg" alt="">
-                            <div class="not-user-name">
-                                <h4>Salisu Umar</h4>
-                                <p>like on your post ...</p>
-                                <span>7d ago</span>
-                            </div>
-                        </div>
-                        <div class="not-toggle">
-                            <i class="bi bi-trash"></i>
-                        </div>
-                    </div>
+                <div class="liking-noted" id="like-views">
+                    <!-- show like notifications -->
                 </div>
 
                 <!-- comment Notifications -->
                 <div class="comment-noted" id="comment-noted">
-
+                    <!-- show comment notifications -->
                 </div>
 
                 <!-- liking notifications -->
@@ -675,7 +545,46 @@ if($count = $noted->rowCount()>0){
             </div>
             <!-- start design post col here with html -->
             <div class="col-md-6" id="postBlock">
-                
+                <!-- start join and list all group that exit in the site  -->
+                <div class="dashboard-grops">
+                    <div class="group-part">
+                        <img src="../asset/img/profile.jpg" alt="">
+                        <div class="part-name">
+                            <p>Gdss Gombe</p>
+                            <button>Follow</button>
+                        </div>
+                    </div>
+                    <div class="group-part">
+                        <img src="../asset/img/profile.jpg" alt="">
+                        <div class="part-name">
+                            <p>Gdss Gombe</p>
+                            <button>Follow</button>
+                        </div>
+                    </div>
+                    <div class="group-part">
+                        <img src="../asset/img/profile.jpg" alt="">
+                        <div class="part-name">
+                            <p>Gdss Gombe</p>
+                            <button>Follow</button>
+                        </div>
+                    </div>
+                    <div class="group-part">
+                        <img src="../asset/img/profile.jpg" alt="">
+                        <div class="part-name">
+                            <p>Gdss Gombe</p>
+                            <button>Follow</button>
+                        </div>
+                    </div>
+                    <div class="group-part">
+                        <img src="../asset/img/profile.jpg" alt="">
+                        <div class="part-name">
+                            <p>Gdss Gombe</p>
+                            <button>Follow</button>
+                        </div>
+                    </div>              
+                    
+                </div>
+                <!-- end join and list all group that exit in the site  -->
                 <div class="posting-block">
                     <div class="displyAllUsersPosting">
                             
