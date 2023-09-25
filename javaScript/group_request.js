@@ -272,6 +272,25 @@ function insertNewGroupRequest(groupIdInsert){
    xhrInsert.send();
 }
 
+
+// join group with follow button 
+
+function followGroups(groupIdInsert){
+    // alert(groupIdInsert);
+   let xhrInsert = new XMLHttpRequest();
+   xhrInsert.open("POST","groups/insert_joining_groups.php?ided="+groupIdInsert,true);
+   xhrInsert.onload = ()=>{
+        if(xhrInsert.readyState === XMLHttpRequest.DONE){
+            if(xhrInsert.status === 200){            
+                // alert(xhrInsert.response);
+                document.getElementById("follow_button"+groupIdInsert).innerText = "Following";
+                document.getElementById("displayJoiningGroups").innerHTML = xhrInsert.response;
+            }
+        }
+   }
+   xhrInsert.send();
+}
+
 // open group down using javaScript function 
 
 function openGroupDrop(){
@@ -357,3 +376,20 @@ setInterval(()=>{
     let datas = new FormData(formData)
     xhrDispla.send(datas);
  }
+
+
+
+// get a follow groups in user dasshboard
+
+const resulties = document.querySelector("#dashboard-grops");
+
+
+let chr = new XMLHttpRequest();
+chr.open("GET", "groups/follow_group.php", true);
+chr.onload = ()=>{
+    if(chr.readyState === XMLHttpRequest.DONE && chr.status === 200){
+        // alert(chr.response);
+        resulties.innerHTML = chr.response;
+    }
+}
+chr.send();

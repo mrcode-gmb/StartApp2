@@ -118,8 +118,22 @@
             return $quer2;
         }
 
+        public function selectFollowGroup($id){
+            $selectAll = "SELECT * FROM group_name WHERE creator_id != '{$id}' ORDER BY rand()";
+            $quer2 = $this->dbConned->prepare($selectAll);
+            $quer2->execute();
+            return $quer2;
+        }
         public function selectAllGroupsWith($id,$sessionId){
             $selectAll = "SELECT * FROM group_request gr INNER JOIN group_name gn ON gn.group_id = gr.group_key WHERE group_key = '{$id}' AND joiner_id = '{$sessionId}'";
+            $quer2 = $this->dbConned->prepare($selectAll);
+            $quer2->execute();
+            return $quer2;
+
+        }
+
+        public function followGroupsFunction($id,$sessionId){
+            $selectAll = "SELECT * FROM group_request gr INNER JOIN group_name gn ON gn.group_id = gr.group_key WHERE group_key = '{$id}' AND joiner_id = '{$sessionId}' ORDER BY rand()";
             $quer2 = $this->dbConned->prepare($selectAll);
             $quer2->execute();
             return $quer2;

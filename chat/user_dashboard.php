@@ -197,21 +197,6 @@ if($noted->rowCount()>0 || $like->rowCount()>0){
     </div>
     <!-- find or create a new group -->
 
-    <!-- return error in time  -->
-    <!-- <div id="returnErrors">
-        <div class="position-fixed" id="position-fixed">
-            <div class="alert-flex">
-                <h5><i class="fa fa-triangle-exclamation"></i> Request send !</h5>
-                <p id="percentAll" style="display: none;">0%</p>
-            </div>
-            <div class="loader-green">
-                <div class="shows-green" id="shows">
-                    
-                </div>
-            </div>
-        </div>
-    </div> -->
-
     <div class="main">   
         <!-- start header of my website       -->
         <div class="headers">
@@ -546,43 +531,14 @@ if($noted->rowCount()>0 || $like->rowCount()>0){
             <!-- start design post col here with html -->
             <div class="col-md-6" id="postBlock">
                 <!-- start join and list all group that exit in the site  -->
-                <div class="dashboard-grops">
-                    <div class="group-part">
+                <div class="dashboard-grops" id="dashboard-grops" onload="getThis(this)">
+                    <!-- <div class="group-part">
                         <img src="../asset/img/profile.jpg" alt="">
                         <div class="part-name">
                             <p>Gdss Gombe</p>
                             <button>Follow</button>
                         </div>
-                    </div>
-                    <div class="group-part">
-                        <img src="../asset/img/profile.jpg" alt="">
-                        <div class="part-name">
-                            <p>Gdss Gombe</p>
-                            <button>Follow</button>
-                        </div>
-                    </div>
-                    <div class="group-part">
-                        <img src="../asset/img/profile.jpg" alt="">
-                        <div class="part-name">
-                            <p>Gdss Gombe</p>
-                            <button>Follow</button>
-                        </div>
-                    </div>
-                    <div class="group-part">
-                        <img src="../asset/img/profile.jpg" alt="">
-                        <div class="part-name">
-                            <p>Gdss Gombe</p>
-                            <button>Follow</button>
-                        </div>
-                    </div>
-                    <div class="group-part">
-                        <img src="../asset/img/profile.jpg" alt="">
-                        <div class="part-name">
-                            <p>Gdss Gombe</p>
-                            <button>Follow</button>
-                        </div>
-                    </div>              
-                    
+                    </div>                     -->
                 </div>
                 <!-- end join and list all group that exit in the site  -->
                 <div class="posting-block">

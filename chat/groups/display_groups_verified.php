@@ -8,7 +8,7 @@
     $objGroup = new groupController();
 
     $sessionId = $_SESSION['id'];
-
+    $getIDing = "";
     $selectG = $objGroup->selectAllVerifiedsGroups($sessionId);
 
     // if($selectG->rowCount() > 0){

@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div class="joint-c-left">
-                    <button onclick="insertNewGroupRequest('.$fetchAll['group_id'].')">Joining</button>
+                    <button onclick="insertNewGroupRequest('.$fetchAll['group_id'].')">Follow</button>
                 </div>
             </div>';
         }
